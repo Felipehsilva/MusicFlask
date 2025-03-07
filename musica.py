@@ -1,0 +1,74 @@
+from flask import Flask, render_template, request, redirect,session
+
+class Musica:
+    def __init__(self, nome, artista, genero):
+        self.nome = nome
+        self.artista = artista
+        self.genero = genero
+
+
+
+musica01 = Musica('Temporal','Hungria','Rap')
+musica02 = Musica('A sua','Raimundos','Rock')
+musica03 = Musica('Vendaval','Fernandoe  Sorocaba','Sertanejo')
+lista = [musica01,musica02,musica03]
+
+app = Flask(__name__)
+'''
+@app.route("/inicio")
+def hello():
+    return "<h1>Hello World</h1>"
+'''
+app.secret_key = 'aprendendodoiniciocomdaniel'
+
+@app.route("/") # se colocar só / o inves de /musicas vira a homeage
+def listarMusicas():
+
+    return render_template('lista_musicas.html',
+                           musicas = lista,
+                           titulo = "Lista Musica"
+                           
+                           )
+
+
+@app.route("/cadastrar") 
+def cadastrarMusicas():
+    return render_template('cadastra_musica.html',
+                           
+                           titulo = "Pagina de cadastro"
+                           
+                           )
+
+
+@app.route('/adicionar',methods=['POST'])
+def adicionar_musica():
+    name = request.form['txtNome']
+    artista = request.form['txtArtista']
+    genero = request.form['txtGenero']
+    novaMusica = Musica(name,artista,genero)
+    lista.append(novaMusica)
+    return redirect('/')
+
+@app.route("/login") 
+def Logar():
+    return render_template('login.html',
+                           
+                           titulo = "Pagina de Login"
+                           
+                           )
+
+@app.route('/autenticar',methods=['POST',]) 
+def autenticar():
+    if request.form['txtSenha'] == 'admin':
+        session['usuario_logado'] = request.form['txtLogin']
+        return redirect('/')
+    else:
+        return redirect("/login")
+    
+app.route('/sair')
+def sair():
+    session['usuario_logado'] = None
+    return redirect('/')
+
+
+app.run(debug=True)# debug = True evita ter que rodar manualmente o flask apos cada atualizacao no codigo
