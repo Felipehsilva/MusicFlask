@@ -1,24 +1,29 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    
-    <title>Cadastro de Musica</title>
-</head>
-<body>
+{% extends 'padrao.html' %}
+
+{% block conteudo %}
     <form method="post" action="/adicionar">
-        <label>Nome da Musica:</label>
-        <input type="text" name="txtNome">
-        
-        <label>Artista:</label>
-        <input type="text" name="txtArtista">
+        <fieldset>
+            
 
-        <label>Genero:</label>
-        <input type="text" name="txtGenero">
+            <div class="mb-3">
+                <label for="txtNome">Nome da Musica:</label>
+                <input type="text" name="txtNome" id="txtNome" class="form-control">
+            </div>
+            
+            <div class="mb-3">
+                <label for="txtArtista">Artista:</label>
+                <input type="text" name="txtArtista" id="txtArtista" class="form-control">
+            </div>
 
-        <button type="submit">Cadastrar</button>
-        
+            <div class="mb-3">
+                <label for="txtGenero">Genero:</label>
+                <input type="text" name="txtGenero" id="txtGenero" class="form-control">
+            </div>
+            
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </div>
+        </fieldset>
         
     </form>
-</body>
-</html>
+{% endblock %}    
