@@ -13,7 +13,7 @@ musica02 = Musica('A sua','Raimundos','Rock')
 musica03 = Musica('Vendaval','Fernando e  Sorocaba','Sertanejo')
 lista = [musica01,musica02,musica03]
 
-app = Flask(__name__)
+app = Flask(__name__)  
 '''
 @app.route("/inicio")
 def hello():
